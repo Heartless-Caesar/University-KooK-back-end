@@ -1,0 +1,33 @@
+{
+  "name": "university-kook-back-end",
+  "version": "1.0.0",
+  "description": "This was created to serve as the NodeJS backend for the KooK project. The before mentioned project was initiated in 2020 by it's original group. I was accepted into the group around Febuary 2022 due to my programming knowledge.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Heartless-Caesar/University-KooK-back-end.git"
+  },
+  "author": "Caesar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Heartless-Caesar/University-KooK-back-end/issues"
+  },
+  "homepage": "https://github.com/Heartless-Caesar/University-KooK-back-end#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.17.0",
+    "xss-clean": "^0.1.1"
+  }
+}
