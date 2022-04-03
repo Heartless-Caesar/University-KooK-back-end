@@ -100,6 +100,10 @@ module.exports = {
       id_usuario: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "usuario",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
@@ -126,6 +130,10 @@ module.exports = {
       id_usuario: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "usuario",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
@@ -170,6 +178,18 @@ module.exports = {
       fk_id_usuarios: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "usuarios",
+          id: "id",
+        },
+      },
+      fk_id_receitas: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "receitas",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
