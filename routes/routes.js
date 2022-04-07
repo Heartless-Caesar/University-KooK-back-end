@@ -14,10 +14,7 @@ const registerUser = async (req, res) => {
       .json({ msg: "Please provide all credentials" });
   }
 
-  const newUser = await Pool.query(
-    `INSERT INTO usuarios (nome, senha, email) VALUES($1,$1,$1)`,
-    [nome, senha, email]
-  );
+  //const newUser =
 
-  res.status(StatusCodes.OK).json({ newUser });
+  res.status(StatusCodes.OK).json({});
 };
