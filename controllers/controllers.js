@@ -3,7 +3,9 @@ const { sequelize, User } = require("../models");
 const bcrypt = require("bcrypt");
 
 const getAll = async (req, res) => {
-  res.status(StatusCodes.OK).json({ msg: "working" });
+  const allRecepies = await User.findAll({});
+
+  res.status(StatusCodes.OK).json({ allRecepies });
 };
 
 const registerUser = async (req, res) => {
