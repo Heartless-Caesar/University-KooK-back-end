@@ -1,6 +1,8 @@
 const { StatusCodes } = require("http-status-codes");
 const { sequelize, User } = require("../models");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 const getAll = async (req, res) => {
   const allRecepies = await User.findAll({});
@@ -25,7 +27,11 @@ const registerUser = async (req, res) => {
     email,
   });
 
-  res.status(StatusCodes.OK).json({ msg: "working", item: newUser });
+  const signToken = jwt.sign(newUser, process.env.JWT_SECRET);
+
+  res
+    .status(StatusCodes.CREATED)
+    .json({ msg: "working", item: newUser, token: signToken });
 };
 
 module.exports = { registerUser, getAll };
