@@ -1,5 +1,6 @@
 "use strict";
 const { Model, UUIDV4 } = require("sequelize");
+const bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -34,6 +35,16 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       tableName: "usuario",
       modelName: "User",
+      instanceMethods: {
+        generateHash(password) {
+          return bcrypt.hash(password, bcrypt.genSaltSync(10));
+        },
+        comparePassword: {
+          validatePassword(password) {
+            return bcrypt.compare(password, this.password);
+          },
+        },
+      },
     }
   );
   return User;
