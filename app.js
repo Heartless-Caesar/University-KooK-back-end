@@ -17,7 +17,7 @@ app.use("/app", router);
 //START APP FUNCTION
 const start = async (req, res) => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.authenticate();
     app.listen(port, () => {
       console.log(`Listening on port ${port}...`);
     });

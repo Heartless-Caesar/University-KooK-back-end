@@ -4,12 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-/*const getAll = async (req, res) => {
-  const allRecepies = await User.findAll({});
-
-  res.status(StatusCodes.OK).json({ allRecepies });
-};*/
-
+//REGISTRATION
 const registerUser = async (req, res) => {
   const { nome, senha, email } = req.body;
 
@@ -40,6 +35,7 @@ const registerUser = async (req, res) => {
     .json({ msg: "working", item: newUser, token: signToken });
 };
 
+//LOGIN
 const login = async (req, res) => {
   const { loginEmail, senha } = req.body;
 
@@ -52,14 +48,24 @@ const login = async (req, res) => {
   const dbUser = await User.findOne({ where: { email: loginEmail } });
 
   if (!dbUser) {
-    res.status(StatusCodes.UNAUTHORIZED).json({ msg: "No such user" });
+    return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "No such user" });
   }
 
+  const comparePasswords = await bcrypt.compare(
+    senha,
+    User.findOne({ where: { senha: senha } })
+  );
+
+  if (!comparePasswords) {
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ msg: "Passwords don't match" });
+  }
   const loginToken = jwt.sign({ logged: dbUser }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 
-  res.status(StatusCodes.OK).json({ dbUser });
+  res.status(StatusCodes.OK).json({ user: dbUser, token: loginToken });
 };
 
 module.exports = { registerUser, login };
