@@ -35,16 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       tableName: "usuario",
       modelName: "User",
-      instanceMethods: {
-        generateHash(password) {
-          return bcrypt.hash(password, bcrypt.genSaltSync(10));
-        },
-        comparePassword: {
-          validatePassword(password) {
-            return bcrypt.compare(password, this.password);
-          },
-        },
-      },
     }
   );
   return User;

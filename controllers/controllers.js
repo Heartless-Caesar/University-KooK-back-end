@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const { sequelize, User } = require("../models");
+const bcrypt = require("bcrypt");
 
 const getAll = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "working" });
@@ -14,7 +15,13 @@ const registerUser = async (req, res) => {
       .json({ msg: "Please provide all credentials" });
   }
 
-  const newUser = await User.create({ nome, senha, email });
+  const salt = await bcrypt.genSalt(10);
+
+  const newUser = await User.create({
+    nome,
+    senha: await bcrypt.hash(senha, salt),
+    email,
+  });
 
   res.status(StatusCodes.OK).json({ msg: "working", item: newUser });
 };
