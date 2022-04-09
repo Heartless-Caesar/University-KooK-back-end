@@ -27,9 +27,13 @@ const registerUser = async (req, res) => {
     email,
   });
 
-  const signToken = jwt.sign({ newUser: newUser }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
+  const signToken = jwt.sign(
+    { registeredUser: newUser },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "30d",
+    }
+  );
 
   res
     .status(StatusCodes.CREATED)
@@ -46,6 +50,14 @@ const login = async (req, res) => {
   }
 
   const dbUser = await User.findOne({ where: { email: loginEmail } });
+
+  if (!dbUser) {
+    res.status(StatusCodes.UNAUTHORIZED).json({ msg: "No such user" });
+  }
+
+  const loginToken = jwt.sign({ logged: dbUser }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
 
   res.status(StatusCodes.OK).json({ dbUser });
 };
