@@ -50,12 +50,14 @@ const login = async (req, res) => {
   if (!dbUser) {
     return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "No such user" });
   }
-  if (dbUser) {
-    dbUser.testMethod();
-  }
+
+  const senhaParaComapracao = await User.findOne({
+    where: { email: loginEmail },
+  });
+
   const comparePasswords = await bcrypt.compare(
     senha,
-    User.findOne({ where: { senha: senha } })
+    senhaParaComapracao.senha
   );
 
   if (!comparePasswords) {
