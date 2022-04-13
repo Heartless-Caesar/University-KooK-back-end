@@ -2,7 +2,7 @@ const Recepie = require("../models/recepies");
 const multer = require("multer");
 const fs = require("fs");
 
-const createRecepie = async () => {
+const createRecepie = async (req, res) => {
   const {
     inputTitulo,
     inputDescricao,
