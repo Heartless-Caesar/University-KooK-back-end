@@ -1,7 +1,6 @@
 const Recepie = require("../models/recepies");
 const multer = require("multer");
 const fs = require("fs");
-const { DataTypes } = require("sequelize/types");
 
 const createRecepie = async () => {
   const {
