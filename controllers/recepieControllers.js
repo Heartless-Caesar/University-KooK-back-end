@@ -1,6 +1,5 @@
 const Recepie = require("../models/recepies");
 const multer = require("multer");
-const fs = require("fs");
 
 const createRecepie = async (req, res) => {
   const {
@@ -19,19 +18,29 @@ const createRecepie = async (req, res) => {
     },
   });
 
-  const upload = multer({ storage: Storage }).single("testimage");
+  const upload = multer({ storage: Storage }).single("imagem");
 
-  const newRecepie = await Recepie.create({
-    titulo: inputTitulo,
-    descricao: inputDescricao,
-    imagem: {
-      data: req.file.filename,
-      contentType: "image/png",
-    },
-    tempo_preparo: inputTempo_preparo,
-    rendimento: inputRendimento,
-    custo_medio: inputCusto_medio,
+  new Promise(async function (resolve, reject) {
+    upload(req, res, async function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        const newRecepie = await Recepie.create({
+          titulo: inputTitulo,
+          descricao: inputDescricao,
+          imagem: {
+            data: req.file,
+            contentType: "image/jpeg",
+          },
+          tempo_preparo: inputTempo_preparo,
+          rendimento: inputRendimento,
+          custo_medio: inputCusto_medio,
+        });
+        res.status(200).json({ element: newRecepie });
+      }
+    });
   });
 };
 
+//};
 module.exports = { createRecepie };
