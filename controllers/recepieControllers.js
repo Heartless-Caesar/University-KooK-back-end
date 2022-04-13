@@ -29,7 +29,7 @@ const createRecepie = async (req, res) => {
           titulo: inputTitulo,
           descricao: inputDescricao,
           imagem: {
-            data: req.file,
+            data: req.file.filename,
             contentType: "image/jpeg",
           },
           tempo_preparo: inputTempo_preparo,
