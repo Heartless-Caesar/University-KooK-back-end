@@ -20,7 +20,7 @@ app.use("/app", [authRouter, recepieRoutes]);
 //START APP FUNCTION
 const start = async (req, res) => {
   try {
-    await sequelize.authenticate();
+    await sequelize.sync({ force: true });
     app.listen(port, () => {
       console.log(`Listening on port ${port}...`);
     });

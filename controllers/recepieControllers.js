@@ -2,21 +2,16 @@ const { recepies } = require("../models");
 const multer = require("multer");
 
 const createRecepie = async (req, res) => {
-  const {
-    inputTitulo,
-    inputDescricao,
-    inputTempo_preparo,
-    inputRendimento,
-    inputCusto_medio,
-  } = req.body;
+  const { titulo, descricao, tempo_preparo, rendimento, custo_medio } =
+    req.body;
 
   const newRecepie = await recepies.create({
-    titulo: inputTitulo,
+    titulo,
     imagem: req.file,
-    descricao: inputDescricao,
-    tempo_preparo: inputTempo_preparo,
-    rendimento: inputRendimento,
-    custo_medio: inputCusto_medio,
+    descricao,
+    tempo_preparo,
+    rendimento,
+    custo_medio,
   });
 
   res.status(201).json({ recepies: newRecepie });
