@@ -19,6 +19,8 @@ const createRecepie = async (req, res) => {
     rendimento: inputRendimento,
     custo_medio: inputCusto_medio,
   });
+
+  res.status(201).json({ recepie: newRecepie });
 };
 
 const Storage = multer.diskStorage({
@@ -46,4 +48,4 @@ const upload = multer({
 }).array("imagem", 4);
 
 //};
-module.exports = { createRecepie };
+module.exports = { createRecepie, upload };
