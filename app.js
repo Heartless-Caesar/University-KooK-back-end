@@ -12,6 +12,8 @@ const port = process.env.PORT || 5000;
 //JSON PARSING
 app.use(express.json());
 
+app.use("/uploads", express.static("./uploads"));
+
 //APPLYING /APP TO ALL ROUTES IN THIS ROUTER
 app.use("/app", [authRouter, recepieRoutes]);
 

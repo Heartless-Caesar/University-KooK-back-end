@@ -1,4 +1,4 @@
-const Recepie = require("../models/recepies");
+const { recepies } = require("../models");
 const multer = require("multer");
 
 const createRecepie = async (req, res) => {
@@ -10,7 +10,7 @@ const createRecepie = async (req, res) => {
     inputCusto_medio,
   } = req.body;
 
-  const newRecepie = await Recepie.create({
+  const newRecepie = await recepies.create({
     titulo: inputTitulo,
     imagem: req.file,
     descricao: inputDescricao,
@@ -19,7 +19,7 @@ const createRecepie = async (req, res) => {
     custo_medio: inputCusto_medio,
   });
 
-  res.status(201).json({ recepie: newRecepie });
+  res.status(201).json({ recepies: newRecepie });
 };
 
 const Storage = multer.diskStorage({
