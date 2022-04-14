@@ -1,21 +1,7 @@
+const { StatusCodes } = require("http-status-codes");
 const { recepies } = require("../models");
 const multer = require("multer");
-
-const createRecepie = async (req, res) => {
-  const { titulo, descricao, tempo_preparo, rendimento, custo_medio } =
-    req.body;
-
-  const newRecepie = await recepies.create({
-    titulo,
-    imagem: req.file,
-    descricao,
-    tempo_preparo,
-    rendimento,
-    custo_medio,
-  });
-
-  res.status(201).json({ recepies: newRecepie });
-};
+const path = require("path");
 
 const Storage = multer.diskStorage({
   destination: (req, res, cb) => {
@@ -41,5 +27,20 @@ const upload = multer({
   },
 }).array("imagem", 4);
 
-//};
+const createRecepie = async (req, res) => {
+  const { titulo, descricao, tempo_preparo, rendimento, custo_medio } =
+    req.body;
+
+  const newRecepie = await recepies.create({
+    titulo,
+    imagem: req.file,
+    descricao,
+    tempo_preparo,
+    rendimento,
+    custo_medio,
+  });
+
+  res.status(StatusCodes.CREATED).json({ addedRecepie: newRecepie });
+};
+
 module.exports = { createRecepie, upload };

@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      imagem: {
+        type: DataTypes.BLOB,
+      },
       titulo: {
         type: DataTypes.STRING(45),
       },

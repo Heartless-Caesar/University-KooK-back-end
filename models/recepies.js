@@ -15,24 +15,31 @@ module.exports = (sequelize, DataTypes) => {
     {
       titulo: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       descricao: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       imagem: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       tempo_preparo: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
       rendimento: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
       custo_medio: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
       fk_id_usuario: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
     {
