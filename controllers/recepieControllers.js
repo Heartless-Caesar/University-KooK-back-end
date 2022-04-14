@@ -5,7 +5,6 @@ const createRecepie = async (req, res) => {
   const {
     inputTitulo,
     inputDescricao,
-    inputImagem,
     inputTempo_preparo,
     inputRendimento,
     inputCusto_medio,
@@ -13,7 +12,7 @@ const createRecepie = async (req, res) => {
 
   const newRecepie = await Recepie.create({
     titulo: inputTitulo,
-    imagem: req.file.path,
+    imagem: req.file,
     descricao: inputDescricao,
     tempo_preparo: inputTempo_preparo,
     rendimento: inputRendimento,
