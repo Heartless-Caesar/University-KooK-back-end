@@ -13,13 +13,27 @@ module.exports = (sequelize, DataTypes) => {
   }
   recepies.init(
     {
-      titulo: DataTypes.STRING,
-      descricao: DataTypes.STRING,
-      imagem: DataTypes.BLOB,
-      tempo_preparo: DataTypes.INTEGER,
-      rendimento: DataTypes.INTEGER,
-      custo_medio: DataTypes.INTEGER,
-      fk_id_usuario: DataTypes.INTEGER,
+      titulo: {
+        type: DataTypes.STRING,
+      },
+      descricao: {
+        type: DataTypes.STRING,
+      },
+      imagem: {
+        type: DataTypes.BLOB,
+      },
+      tempo_preparo: {
+        type: DataTypes.INTEGER,
+      },
+      rendimento: {
+        type: DataTypes.INTEGER,
+      },
+      custo_medio: {
+        type: DataTypes.INTEGER,
+      },
+      fk_id_usuario: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,
