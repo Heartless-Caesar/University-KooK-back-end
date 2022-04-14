@@ -8,7 +8,7 @@ const Storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
@@ -27,13 +27,14 @@ const upload = multer({
   },
 }).array("imagem", 4);
 
+//CREATE
 const createRecepie = async (req, res) => {
   const { titulo, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
   const newRecepie = await recepies.create({
     titulo,
-    imagem: req.file,
+    imagem: req.file.path,
     descricao,
     tempo_preparo,
     rendimento,
