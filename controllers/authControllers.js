@@ -65,9 +65,13 @@ const login = async (req, res) => {
       .status(StatusCodes.UNAUTHORIZED)
       .json({ msg: "Passwords don't match" });
   }
-  const loginToken = jwt.sign({ logged: dbUser }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
+  const loginToken = jwt.sign(
+    { email: dbUser.email, UUID: dbUser.UUID },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "30d",
+    }
+  );
 
   res.status(StatusCodes.OK).json({ user: dbUser, token: loginToken });
 };
