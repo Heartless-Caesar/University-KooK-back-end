@@ -1,4 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
+const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -14,7 +15,9 @@ const authMiddleware = async (req, res) => {
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = { id: user.UUID, email: user.email };
+    const dbUser = await User.findOne({ where: { UUID: user.UUID } });
+
+    req.user = { id: dbUser.UUID, email: dbUser.email };
 
     next();
   } catch (error) {
