@@ -14,14 +14,15 @@ const authMiddleware = async (req, res) => {
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
 
-    const { id, email } = user;
+    req.user = { id: user.id, email: user.email };
 
-    req.user = { id, email };
+    next();
   } catch (error) {
     console.log(req.headers);
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .json({ msg: "Something went wrong in the authentication" });
   }
-  next();
 };
+
+module.exports = authMiddleware;

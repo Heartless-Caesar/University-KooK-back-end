@@ -12,12 +12,12 @@ const port = process.env.PORT || 5000;
 
 //JSON PARSING
 app.use(express.json());
-app.use(authMiddleware);
 
 app.use("/uploads", express.static("./uploads"));
 
 //APPLYING /APP TO ALL ROUTES IN THIS ROUTER
-app.use("/app", [authRouter, recepieRoutes]);
+app.use("/app", authRouter);
+app.use("/app", authMiddleware, recepieRoutes);
 
 //START APP FUNCTION
 const start = async (req, res) => {
