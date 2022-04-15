@@ -19,6 +19,7 @@ const authMiddleware = async (req, res) => {
     next();
   } catch (error) {
     console.log(req.headers);
+    console.log(req.user);
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .json({ msg: "Something went wrong in the authentication" });
