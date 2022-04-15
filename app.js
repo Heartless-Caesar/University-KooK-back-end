@@ -1,4 +1,5 @@
 const recepieRoutes = require("./routes/recepieRoutes");
+const authMiddleware = require("./middleware/auth");
 const authRouter = require("./routes/authRoutes");
 const { sequelize } = require("./models/index");
 const express = require("express");
@@ -11,6 +12,7 @@ const port = process.env.PORT || 5000;
 
 //JSON PARSING
 app.use(express.json());
+app.use(authMiddleware);
 
 app.use("/uploads", express.static("./uploads"));
 
