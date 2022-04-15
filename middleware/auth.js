@@ -15,9 +15,7 @@ const authMiddleware = async (req, res) => {
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
 
-    const dbUser = await User.findOne({ where: { UUID: user.UUID } });
-
-    req.user = { id: dbUser.UUID, email: dbUser.email };
+    req.user = { id: user.UUID, email: user.email };
 
     next();
   } catch (error) {
