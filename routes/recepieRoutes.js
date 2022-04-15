@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { createRecepie, upload } = require("../controllers/recepieControllers");
+const { createRecepie } = require("../controllers/recepieControllers");
 
-router.route("/recepie/create").post(createRecepie, upload);
+router.route("/recepie/create").post(createRecepie);
 //router.route("/:id").post(login);
 
 module.exports = router;

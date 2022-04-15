@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { recepies } = require("../models");
+const { recepies, User } = require("../models");
 const multer = require("multer");
 const path = require("path");
 
@@ -32,13 +32,16 @@ const createRecepie = async (req, res) => {
   const { titulo, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
+  const curentUser = await User.findOne({ where: { id: req.user.id } });
+
   const newRecepie = await recepies.create({
     titulo,
-    imagem: req.file.path,
+    imagem: req.file,
     descricao,
     tempo_preparo,
     rendimento,
     custo_medio,
+    fk_id_usuario: req.user.id,
   });
 
   res.status(StatusCodes.CREATED).json({ addedRecepie: newRecepie });
