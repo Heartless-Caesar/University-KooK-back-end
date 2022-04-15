@@ -32,7 +32,7 @@ const createRecepie = async (req, res) => {
   const { titulo, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
-  const currentUser = await User.findOne({ where: { id: req.user.id } });
+  const currentUser = await User.findOne({ where: { UUID: req.user.UUID } });
 
   const newRecepie = await recepies.create({
     titulo,
@@ -41,7 +41,7 @@ const createRecepie = async (req, res) => {
     tempo_preparo,
     rendimento,
     custo_medio,
-    fk_id_usuario: currentUser.id,
+    fk_id_usuario: currentUser.UUID,
   });
 
   res.status(StatusCodes.CREATED).json({ addedRecepie: newRecepie });
