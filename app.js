@@ -3,6 +3,7 @@ const authMiddleware = require("./middleware/auth");
 const authRouter = require("./routes/authRoutes");
 const { sequelize } = require("./models/index");
 const express = require("express");
+const bodyParser = require("body-parser");
 require("express-async-errors");
 const app = express();
 
@@ -12,6 +13,10 @@ const port = process.env.PORT || 5000;
 
 //JSON PARSING
 app.use(express.json());
+
+//BODY PARSING FOR RECEPIE CREATION FORM
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/uploads", express.static("./uploads"));
 

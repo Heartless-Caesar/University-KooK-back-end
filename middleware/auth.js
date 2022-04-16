@@ -1,9 +1,8 @@
 const { StatusCodes } = require("http-status-codes");
-const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const authMiddleware = async (req, res) => {
+const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -21,9 +20,10 @@ const authMiddleware = async (req, res) => {
   } catch (error) {
     console.log(req.headers);
     console.log(req.user);
+    console.log(error);
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .json({ msg: "Something went wrong in the authentication" });
+      .json({ msg: "Something went wrong" });
   }
 };
 
