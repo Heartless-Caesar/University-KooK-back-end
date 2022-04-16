@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       fk_id_usuario: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },

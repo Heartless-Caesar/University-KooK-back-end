@@ -36,7 +36,7 @@ const createRecepie = async (req, res) => {
 
   const newRecepie = await recepies.create({
     titulo: titulo,
-    imagem: req.file,
+    imagem: req.files,
     descricao: descricao,
     tempo_preparo: tempo_preparo,
     rendimento: rendimento,

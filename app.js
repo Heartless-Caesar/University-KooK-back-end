@@ -13,16 +13,6 @@ const port = process.env.PORT || 5000;
 //JSON PARSING
 app.use(express.json());
 
-/*
-const multer = require("multer");
-const upload = multer();
-
-app.post("/send", upload.none(), (req, res) => {
-  const formData = req.body;
-  console.log("form data", formData);
-  res.sendStatus(200);
-});*/
-
 app.use("/uploads", express.static("./uploads"));
 
 //APPLYING /APP TO ALL ROUTES IN THIS ROUTER
