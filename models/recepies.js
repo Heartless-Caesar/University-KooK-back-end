@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       imagem: {
-        type: DataTypes.STRING,
+        type: DataTypes.BLOB,
         allowNull: false,
       },
       tempo_preparo: {

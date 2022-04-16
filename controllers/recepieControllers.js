@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { recepies, User } = require("../models");
+const { recepies, User } = require("../models/index");
 const multer = require("multer");
 const path = require("path");
 
@@ -35,12 +35,12 @@ const createRecepie = async (req, res) => {
   const currentUser = await User.findOne({ where: { UUID: req.user.UUID } });
 
   const newRecepie = await recepies.create({
-    titulo,
+    titulo: titulo,
     imagem: req.file,
-    descricao,
-    tempo_preparo,
-    rendimento,
-    custo_medio,
+    descricao: descricao,
+    tempo_preparo: tempo_preparo,
+    rendimento: rendimento,
+    custo_medio: custo_medio,
     fk_id_usuario: currentUser.UUID,
   });
 
