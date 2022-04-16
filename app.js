@@ -20,7 +20,7 @@ app.use("/app", authRouter);
 app.use("/app", authMiddleware, recepieRoutes);
 
 //START APP FUNCTION
-const start = async (req, res) => {
+const start = async () => {
   try {
     await sequelize.sync({ force: true });
     app.listen(port, () => {

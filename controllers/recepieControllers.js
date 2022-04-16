@@ -47,4 +47,18 @@ const createRecepie = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ addedRecepie: newRecepie });
 };
 
-module.exports = { createRecepie, upload };
+const getRecepie = async (req, res) => {
+  const { id } = req.params;
+
+  const recepie = await recepies.findOne({ where: { id: id } });
+
+  if (!recepie) {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: `Recepie of id ${id} not found` });
+  }
+
+  res.status(StatusCodes.OK).json({ recepie: recepie });
+};
+
+module.exports = { createRecepie, upload, getRecepie };
