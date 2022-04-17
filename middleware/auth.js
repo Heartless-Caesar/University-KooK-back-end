@@ -19,12 +19,11 @@ const authMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(req.headers);
-    console.log(req.user);
     console.log(error);
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .json({ msg: "Something went wrong" });
+      .json({ msg: "Something went wrong " + req.headers.authorization });
   }
 };
 
-module.exports = authMiddleware;
+module.exports = { authMiddleware };

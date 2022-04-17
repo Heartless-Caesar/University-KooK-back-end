@@ -1,5 +1,5 @@
 const recepieRoutes = require("./routes/recepieRoutes");
-const authMiddleware = require("./middleware/auth");
+const { authMiddleware } = require("./middleware/auth");
 const authRouter = require("./routes/authRoutes");
 const { sequelize } = require("./models/index");
 const express = require("express");
