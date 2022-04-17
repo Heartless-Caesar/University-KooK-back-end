@@ -2,7 +2,6 @@ const { StatusCodes } = require("http-status-codes");
 const { recepies, User } = require("../models/index");
 const multer = require("multer");
 const path = require("path");
-const jwt = require("jsonwebtoken");
 
 const Storage = multer.diskStorage({
   destination: (req, res, cb) => {
