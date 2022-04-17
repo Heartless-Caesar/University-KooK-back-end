@@ -2,6 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const { recepies, User } = require("../models/index");
 const multer = require("multer");
 const path = require("path");
+const jwt = require("jsonwebtoken");
 
 const Storage = multer.diskStorage({
   destination: (req, res, cb) => {
@@ -33,7 +34,7 @@ const createRecepie = async (req, res) => {
     req.body;
 
   const currentUser = await User.findOne({ where: { UUID: req.user.UUID } });
-
+  //const token = jwt.sign({ user });
   const newRecepie = await recepies.create({
     titulo: titulo,
     imagem: req.files,
@@ -44,9 +45,13 @@ const createRecepie = async (req, res) => {
     fk_id_usuario: currentUser.UUID,
   });
 
-  res.status(StatusCodes.CREATED).json({ addedRecepie: newRecepie });
+  res.status(StatusCodes.CREATED).json({
+    addedRecepie: newRecepie,
+    token: req.headers.authorization.split(" ")[1],
+  });
 };
 
+//GET RECEPIE
 const getRecepie = async (req, res) => {
   const { id } = req.params;
 
@@ -58,7 +63,10 @@ const getRecepie = async (req, res) => {
       .json({ msg: `Recepie of id ${id} not found` });
   }
 
-  res.status(StatusCodes.OK).json({ recepie: recepie });
+  //TEST
+  console.log(req.headers);
+
+  res.status(StatusCodes.OK).json({ createdRecepie: recepie });
 };
 
 module.exports = { createRecepie, upload, getRecepie };
