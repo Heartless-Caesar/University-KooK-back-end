@@ -63,33 +63,27 @@ const createRecepie = async (req, res) => {
 
 //GET RECEPIE
 const getRecepie = async (req, res) => {
-  const { id } = req.params;
+  const { _id } = req.params;
 
+  //FETCH ELEMENT ACCORDING TO URL PARAM
   const recepie = await recepies.findOne({
-    where: { id: id },
+    where: { id: _id },
   });
 
-  /*const getSign = jwt.sign(
-    { email: req.user.email, UUID: req.user.UUID },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "30d",
-    }
-  );*/
-
+  //ERROR HANDLER
   if (!recepie) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ msg: `Recepie of id ${id} not found` });
+    return res.status(StatusCodes.NOT_FOUND).json({
+      msg: `Recepie of id ${_id} not found`,
+      token: req.headers.authorization,
+    });
   }
 
   //TEST
   console.log(req.headers);
 
-  res.status(StatusCodes.OK).json({
-    createdRecepie: recepie,
-    token: getSign,
-  });
+  //DEFAULT RESPONSE
+  res
+    .status(StatusCodes.CREATED)
+    .json({ recepie, token: req.headers.authorization });
 };
-
 module.exports = { createRecepie, upload, getRecepie };

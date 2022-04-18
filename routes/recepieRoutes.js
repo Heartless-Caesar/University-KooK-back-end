@@ -7,6 +7,6 @@ const {
 } = require("../controllers/recepieControllers");
 
 router.route("/recepie/create").post(upload, createRecepie);
-router.route("/recepie/:id").get(getRecepie);
+router.route("/recepie/:_id").get(getRecepie);
 
 module.exports = router;
