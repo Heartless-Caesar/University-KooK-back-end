@@ -13,7 +13,8 @@ const {
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
-app.use(errorHandlerMiddleware);
+//app.use(errorHandlerMiddleware);
+
 //JSON PARSING
 app.use(express.json());
 

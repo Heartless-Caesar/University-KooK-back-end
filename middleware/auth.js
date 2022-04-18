@@ -1,17 +1,15 @@
-const { StatusCodes, UNAUTHORIZED } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
-const { Unauthorized } = require("./Unauthorized");
+const Unauthorized = require("./Unauthorized");
 require("dotenv").config();
 
 const authMiddleware = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  const authorization = req.headers.authorization;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  if (!authorization || !authorization.startsWith("Bearer ")) {
     throw new Unauthorized("No auth header");
   }
 
-  const token = authHeader.split(" ")[1];
-  console.log(token);
+  const token = authorization.split(" ")[1];
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -19,8 +17,8 @@ const authMiddleware = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log(req.headers);
-    console.log(error);
+    console.log("Headers " + authorization);
+    console.log("Error " + error);
     throw new Unauthorized("Auth invalid");
   }
 };

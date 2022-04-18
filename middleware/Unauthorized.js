@@ -8,4 +8,4 @@ class Unauthorized extends CustomClass {
   }
 }
 
-module.exports = { Unauthorized };
+module.exports = Unauthorized;
