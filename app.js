@@ -5,11 +5,15 @@ const { sequelize } = require("./models/index");
 const express = require("express");
 require("express-async-errors");
 const app = express();
+const {
+  errorHandlerMiddleware,
+} = require("./middleware/errorHandlerMiddleware");
 
 //ENVIRONMENT VIRABLES
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
+app.use(errorHandlerMiddleware);
 //JSON PARSING
 app.use(express.json());
 
