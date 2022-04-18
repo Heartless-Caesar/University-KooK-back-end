@@ -3,6 +3,7 @@ const { recepies, User } = require("../models/index");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
+const { NotFoundError } = require("../middleware/notFound");
 require("dotenv").config();
 
 //ACCESSING USER STORAGE SO UPLOAD BECOMES POSSIBLE
@@ -72,10 +73,7 @@ const getRecepie = async (req, res) => {
 
   //ERROR HANDLER
   if (!recepie) {
-    return res.status(StatusCodes.NOT_FOUND).json({
-      msg: `Recepie of id ${_id} not found`,
-      token: req.headers.authorization,
-    });
+    throw new NotFoundError(`No recepie with id ${_id}`);
   }
 
   //TEST
