@@ -58,7 +58,7 @@ const createRecepie = async (req, res) => {
   //CORRECT RESPONSE
   res.status(StatusCodes.CREATED).json({
     addedRecepie: newRecepie,
-    token: req.headers.authorization.split(" ")[1],
+    token: req.headers.authorization,
   });
 };
 
