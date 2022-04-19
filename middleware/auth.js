@@ -3,13 +3,13 @@ const Unauthorized = require("./Unauthorized");
 require("dotenv").config();
 
 const authMiddleware = async (req, res, next) => {
-  const authorization = req.headers.authorization;
+  const authHeader = req.headers.authorization;
 
-  if (!authorization || !authorization.startsWith("Bearer ")) {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     throw new Unauthorized("No auth header");
   }
 
-  const token = authorization.split(" ")[1];
+  const token = authHeader.split(" ")[1];
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -17,8 +17,7 @@ const authMiddleware = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log("Headers " + authorization);
-    console.log("Error " + error);
+    console.log(token);
     throw new Unauthorized("Auth invalid");
   }
 };

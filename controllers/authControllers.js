@@ -8,12 +8,6 @@ require("dotenv").config();
 const registerUser = async (req, res) => {
   const { nome, senha, email } = req.body;
 
-  if (!nome || !senha || !email) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ msg: "Please provide all credentials" });
-  }
-
   const salt = await bcrypt.genSalt(10);
 
   const newUser = await User.create({
@@ -26,12 +20,12 @@ const registerUser = async (req, res) => {
     { registeredUser: newUser.UUID, email: newUser.email },
     process.env.JWT_SECRET,
     {
-      expiresIn: "30d",
+      expiresIn: process.env.EXPIRES_IN,
     }
   );
 
   res
-    .status(StatusCodes.CREATED)
+    .status(StatusCodes.OK)
     .json({ msg: "working", item: newUser, token: signToken });
 };
 
@@ -69,7 +63,7 @@ const login = async (req, res) => {
     { email: dbUser.email, UUID: dbUser.UUID },
     process.env.JWT_SECRET,
     {
-      expiresIn: "30d",
+      expiresIn: process.env.EXPIRES_IN,
     }
   );
 
