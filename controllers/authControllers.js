@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
 
   res
     .status(StatusCodes.OK)
-    .json({ msg: "working", item: newUser, token: signToken });
+    .json({ msg: "Registered", item: newUser, token: signToken });
 };
 
 //LOGIN

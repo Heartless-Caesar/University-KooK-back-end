@@ -10,6 +10,7 @@ const authMiddleware = async (req, res, next) => {
   }
 
   const token = authHeader.split(" ")[1];
+
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -17,7 +18,7 @@ const authMiddleware = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log(token);
+    console.log(req.headers.authorization);
     throw new Unauthorized("Auth invalid");
   }
 };
