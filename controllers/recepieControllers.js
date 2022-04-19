@@ -86,4 +86,14 @@ const getRecepie = async (req, res) => {
     .status(StatusCodes.CREATED)
     .json({ recepie, token: req.headers.authorization });
 };
-module.exports = { createRecepie, upload, getRecepie };
+
+const getAllRecepies = async (req, res) => {
+  const allRecepies = await recepies.findAll({});
+
+  if (!allRecepies) {
+    throw new NotFoundError("There are no recepies currently");
+  }
+
+  res.status(StatusCodes.CREATED).json({ entries: allRecepies });
+};
+module.exports = { createRecepie, upload, getRecepie, getAllRecepies };
