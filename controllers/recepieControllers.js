@@ -42,7 +42,9 @@ const createRecepie = async (req, res) => {
   console.log(req.user);
 
   //USER UUID SERVING AS FOREIGN KEY
-  const currentUser = await User.findOne({ where: { UUID: req.user.UUID } });
+  const currentUser = await User.findOne({
+    where: { UUID: req.user.UUID },
+  });
 
   //BODY INPUT
   const newRecepie = await recepies.create({

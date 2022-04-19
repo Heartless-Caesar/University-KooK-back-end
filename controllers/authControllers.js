@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
   });
 
   const signToken = jwt.sign(
-    { registeredUser: newUser.UUID, email: newUser.email },
+    { UUID: newUser.UUID, email: newUser.email },
     process.env.JWT_SECRET,
     {
       expiresIn: process.env.EXPIRES_IN,
