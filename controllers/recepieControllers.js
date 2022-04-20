@@ -70,17 +70,15 @@ const updateRecepie = async (req, res) => {
   const { titulo, imagem, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
-  const toUpdateRecepie = await recepies.upsert(
-    {
-      titulo: titulo,
-      descricao: descricao,
-      tempo_preparo: tempo_preparo,
-      imagem: req.file,
-      rendimento: rendimento,
-      custo_medio: custo_medio,
-    },
-    { where: { id: _id } }
-  );
+  const toUpdateRecepie = await recepies.upsert({
+    id: _id,
+    titulo: titulo,
+    descricao: descricao,
+    tempo_preparo: tempo_preparo,
+    imagem: req.file,
+    rendimento: rendimento,
+    custo_medio: custo_medio,
+  });
   res.status(StatusCodes.CREATED).json({
     updatedRecepie: toUpdateRecepie,
     token: req.headers.authorization,
