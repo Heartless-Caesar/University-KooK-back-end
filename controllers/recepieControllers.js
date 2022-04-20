@@ -64,6 +64,15 @@ const createRecepie = async (req, res) => {
   });
 };
 
+//UPDATE RECEPIE
+const updateRecepie = async (req, res) => {
+  const { _id } = req.params;
+  const { titulo, imagem, descricao, tempo_preparo, rendimento, custo_medio } =
+    req.body;
+
+  const toUpdateRecepie = await recepies.update({}, { where: { id: _id } });
+};
+
 //GET RECEPIE
 const getRecepie = async (req, res) => {
   const { _id } = req.params;
