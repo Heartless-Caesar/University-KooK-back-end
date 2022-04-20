@@ -70,7 +70,21 @@ const updateRecepie = async (req, res) => {
   const { titulo, imagem, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
-  const toUpdateRecepie = await recepies.update({}, { where: { id: _id } });
+  const toUpdateRecepie = await recepies.upsert(
+    {
+      titulo: titulo,
+      descricao: descricao,
+      tempo_preparo: tempo_preparo,
+      imagem: req.file,
+      rendimento: rendimento,
+      custo_medio: custo_medio,
+    },
+    { where: { id: _id } }
+  );
+  res.status(StatusCodes.CREATED).json({
+    updatedRecepie: toUpdateRecepie,
+    token: req.headers.authorization,
+  });
 };
 
 //GET RECEPIE
@@ -105,4 +119,10 @@ const getAllRecepies = async (req, res) => {
 
   res.status(StatusCodes.CREATED).json({ entries: allRecepies });
 };
-module.exports = { createRecepie, upload, getRecepie, getAllRecepies };
+module.exports = {
+  createRecepie,
+  upload,
+  getRecepie,
+  updateRecepie,
+  getAllRecepies,
+};
