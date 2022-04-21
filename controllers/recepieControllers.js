@@ -76,19 +76,7 @@ const updateRecepie = async (req, res) => {
   if (!toUpdateRecepie) {
     throw new BadRequest(`No recepie with an id of ${_id}`);
   }
-  const updateBodyObject = {};
 
-  if (titulo) updateBodyObject.titulo = titulo;
-  if (descricao) updateBodyObject.descricao = descricao;
-  if (tempo_preparo) updateBodyObject.tempo_preparo = tempo_preparo;
-  if (rendimento) updateBodyObject.rendimento = rendimento;
-  if (custo_medio) updateBodyObject.custo_medio = custo_medio;
-  if (req.files) updateBodyObject.imagem = req.files;
-
-  const updatedRecepie = await recepies.update(
-    { where: { id: _id } },
-    updateBodyObject
-  );
   res.status(StatusCodes.OK).json({
     updatedRecepie: updatedRecepie,
     token: req.headers.authorization,
