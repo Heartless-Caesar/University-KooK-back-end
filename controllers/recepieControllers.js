@@ -71,14 +71,45 @@ const updateRecepie = async (req, res) => {
   const { titulo, imagem, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
-  const toUpdateRecepie = await recepies.findOne({ where: { id: _id } });
+  const toUpdateRecepie = await recepies.findOne({
+    attributes: [
+      "titulo",
+      "descricao",
+      "tempo_preparo",
+      "rendimento",
+      "custo_medio",
+    ],
+    where: { id: _id },
+  });
 
+  //SETTING UPDATED FIELD IF IT IS PROVIDED
+  if (titulo) {
+    toUpdateRecepie.titulo = titulo;
+  }
+  if (descricao) {
+    toUpdateRecepie.descricao = descricao;
+  }
+  if (tempo_preparo) {
+    toUpdateRecepie.tempo_preparo = tempo_preparo;
+  }
+  if (rendimento) {
+    toUpdateRecepie.rendimento = rendimento;
+  }
+  if (custo_medio) {
+    toUpdateRecepie.custo_medio = custo_medio;
+  }
+  if (req.files) {
+    toUpdateRecepie.imagem = req.files;
+  }
   if (!toUpdateRecepie) {
     throw new BadRequest(`No recepie with an id of ${_id}`);
   }
 
+  //SAVING UPDATED ELEMENT
+  toUpdateRecepie.save();
+
   res.status(StatusCodes.OK).json({
-    updatedRecepie: updatedRecepie,
+    updatedRecepie: toUpdateRecepie,
     token: req.headers.authorization,
   });
 };
