@@ -86,7 +86,7 @@ const updateRecepie = async (req, res) => {
     where: { id: _id },
   });
 
-  //SETTING UPDATED FIELD IF IT IS PROVIDED
+  /* SETTING UPDATED FIELD IF IT IS PROVIDED */
 
   //SETTING PRIMARY KEY AS PUT CLEARS THE DATA
   toUpdateRecepie.id = _id;
@@ -148,6 +148,7 @@ const getRecepie = async (req, res) => {
     .json({ recepie, token: req.headers.authorization });
 };
 
+//GET ALL RECEPIES FROM DB
 const getAllRecepies = async (req, res) => {
   //FETCHES ALL THE RECEPIES IN THE DB
   const allRecepies = await recepies.findAll({});
