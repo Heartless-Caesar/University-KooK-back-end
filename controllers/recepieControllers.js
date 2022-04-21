@@ -73,6 +73,7 @@ const updateRecepie = async (req, res) => {
 
   const toUpdateRecepie = await recepies.findOne({
     attributes: [
+      "id",
       "titulo",
       "descricao",
       "tempo_preparo",
@@ -83,6 +84,7 @@ const updateRecepie = async (req, res) => {
   });
 
   //SETTING UPDATED FIELD IF IT IS PROVIDED
+  toUpdateRecepie.id = _id;
   if (titulo) {
     toUpdateRecepie.titulo = titulo;
   }
