@@ -115,8 +115,9 @@ const updateRecepie = async (req, res) => {
     token: req.headers.authorization,
   });
 };
+//END UPDATE RECEPIE
 
-//GET RECEPIE
+//GET SINGLE RECEPIE
 const getRecepie = async (req, res) => {
   const { _id } = req.params;
 
@@ -148,6 +149,7 @@ const getAllRecepies = async (req, res) => {
 
   res.status(StatusCodes.CREATED).json({ entries: allRecepies });
 };
+//END GET SINGLE RECEPIE
 module.exports = {
   createRecepie,
   upload,
