@@ -1,9 +1,10 @@
-const { StatusCodes } = require("http-status-codes");
+const { NotFoundError } = require("../middleware/notFound");
+const { BadRequest } = require("../middleware/BadRequest");
 const { recepies, User } = require("../models/index");
+const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
-const { NotFoundError } = require("../middleware/notFound");
 require("dotenv").config();
 
 //ACCESSING USER STORAGE SO UPLOAD BECOMES POSSIBLE
@@ -73,9 +74,7 @@ const updateRecepie = async (req, res) => {
   const toUpdateRecepie = await recepies.findOne({ where: { id: _id } });
 
   if (!toUpdateRecepie) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ msg: `No recepie with id of ${id}` });
+    throw new BadRequest(`No recepie with an id of ${_id}`);
   }
   const updateBodyObject = {};
 
@@ -84,12 +83,13 @@ const updateRecepie = async (req, res) => {
   if (tempo_preparo) updateBodyObject.tempo_preparo = tempo_preparo;
   if (rendimento) updateBodyObject.rendimento = rendimento;
   if (custo_medio) updateBodyObject.custo_medio = custo_medio;
+  if (req.files) updateBodyObject.imagem = req.files;
 
   const updatedRecepie = await recepies.update(
     { where: { id: _id } },
     updateBodyObject
   );
-  res.status(StatusCodes.CREATED).json({
+  res.status(StatusCodes.OK).json({
     updatedRecepie: updatedRecepie,
     token: req.headers.authorization,
   });
