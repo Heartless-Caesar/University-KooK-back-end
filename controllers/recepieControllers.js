@@ -110,6 +110,8 @@ const updateRecepie = async (req, res) => {
   if (req.files) {
     toUpdateRecepie.imagem = req.files;
   }
+
+  //IF UPDATE FAILS FOR WHATEVER REASON
   if (!toUpdateRecepie) {
     throw new BadRequest(`No recepie with an id of ${_id}`);
   }
@@ -160,6 +162,19 @@ const getAllRecepies = async (req, res) => {
 
   //OK RESPONSE
   res.status(StatusCodes.CREATED).json({ entries: allRecepies });
+};
+
+//
+const deleteRecepie = async (req, res) => {
+  const { _id } = req.params;
+
+  const deletedItem = await recepies.destroy({ where: { id: _id } });
+
+  if (!deletedItem) {
+    throw new BadRequest(`No item with an id of ${_id}`);
+  }
+
+  res.status(StatusCodes.OK).json({ resp: "Deleted", deleted: deletedItem });
 };
 //END GET SINGLE RECEPIE
 module.exports = {
