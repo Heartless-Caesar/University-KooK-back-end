@@ -163,20 +163,25 @@ const getAllRecepies = async (req, res) => {
   //OK RESPONSE
   res.status(StatusCodes.CREATED).json({ entries: allRecepies });
 };
+//END GET SINGLE RECEPIE
 
-//
+//DELETE CONTROLLER
 const deleteRecepie = async (req, res) => {
+  //ID OF THE ITEM TO BE DELETED
   const { _id } = req.params;
 
+  //THE DELETION ITSELF
   const deletedItem = await recepies.destroy({ where: { id: _id } });
 
+  //IF A RECEPIE WITH THE PROVIDED ID DOES NOT EXIST
   if (!deletedItem) {
     throw new BadRequest(`No item with an id of ${_id}`);
   }
 
+  //OK RESPONSE
   res.status(StatusCodes.OK).json({ resp: "Deleted", deleted: deletedItem });
 };
-//END GET SINGLE RECEPIE
+
 module.exports = {
   createRecepie,
   upload,
