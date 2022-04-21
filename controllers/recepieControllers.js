@@ -32,6 +32,8 @@ const upload = multer({
     cb("Please provide files of the mentioned formats");
   },
 }).array("imagem", 4);
+/*THIS ARRAY METHOD INSTANCITATES THE NAME FOR THE 
+FOLLOWING NUMBER OF FILES TO BE ACCEPTED IN THE UPLOAD*/
 
 //CREATE NEW RECEPIE
 const createRecepie = async (req, res) => {
@@ -71,6 +73,7 @@ const updateRecepie = async (req, res) => {
   const { titulo, imagem, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
+  //FINDS THE DESIRED ELEMENT AND
   const toUpdateRecepie = await recepies.findOne({
     attributes: [
       "id",
@@ -84,7 +87,11 @@ const updateRecepie = async (req, res) => {
   });
 
   //SETTING UPDATED FIELD IF IT IS PROVIDED
+
+  //SETTING PRIMARY KEY AS PUT CLEARS THE DATA
   toUpdateRecepie.id = _id;
+
+  //CONDITIONS TO VERIFY THE PRESENCE OF REQUEST BODY TO EXECUTE THE UPDATE
   if (titulo) {
     toUpdateRecepie.titulo = titulo;
   }
@@ -110,6 +117,7 @@ const updateRecepie = async (req, res) => {
   //SAVING UPDATED ELEMENT
   toUpdateRecepie.save();
 
+  //OK RESPONSE
   res.status(StatusCodes.OK).json({
     updatedRecepie: toUpdateRecepie,
     token: req.headers.authorization,
@@ -141,12 +149,15 @@ const getRecepie = async (req, res) => {
 };
 
 const getAllRecepies = async (req, res) => {
+  //FETCHES ALL THE RECEPIES IN THE DB
   const allRecepies = await recepies.findAll({});
 
+  //IF DB IS EMPTY ERROR MESSAGE
   if (!allRecepies) {
     throw new NotFoundError("There are no recepies currently");
   }
 
+  //OK RESPONSE
   res.status(StatusCodes.CREATED).json({ entries: allRecepies });
 };
 //END GET SINGLE RECEPIE
