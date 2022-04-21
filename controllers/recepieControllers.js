@@ -85,8 +85,12 @@ const updateRecepie = async (req, res) => {
   if (rendimento) updateBodyObject.rendimento = rendimento;
   if (custo_medio) updateBodyObject.custo_medio = custo_medio;
 
+  const updatedRecepie = await recepies.update(
+    { where: { id: _id } },
+    updateBodyObject
+  );
   res.status(StatusCodes.CREATED).json({
-    updatedRecepie: toUpdateRecepie,
+    updatedRecepie: updatedRecepie,
     token: req.headers.authorization,
   });
 };
