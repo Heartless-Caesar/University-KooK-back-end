@@ -70,15 +70,21 @@ const updateRecepie = async (req, res) => {
   const { titulo, imagem, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
-  const toUpdateRecepie = await recepies.upsert({
-    id: _id,
-    titulo: titulo,
-    descricao: descricao,
-    tempo_preparo: tempo_preparo,
-    imagem: req.file,
-    rendimento: rendimento,
-    custo_medio: custo_medio,
-  });
+  const toUpdateRecepie = await recepies.findOne({ where: { id: _id } });
+
+  if (!toUpdateRecepie) {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: `No recepie with id of ${id}` });
+  }
+  const updateBodyObject = {};
+
+  if (titulo) updateBodyObject.titulo = titulo;
+  if (descricao) updateBodyObject.descricao = descricao;
+  if (tempo_preparo) updateBodyObject.tempo_preparo = tempo_preparo;
+  if (rendimento) updateBodyObject.rendimento = rendimento;
+  if (custo_medio) updateBodyObject.custo_medio = custo_medio;
+
   res.status(StatusCodes.CREATED).json({
     updatedRecepie: toUpdateRecepie,
     token: req.headers.authorization,
