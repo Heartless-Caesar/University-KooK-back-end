@@ -1,3 +1,4 @@
+const { updateValidator } = require("../middleware/updateValidator");
 const express = require("express");
 const router = express.Router();
 const {
@@ -9,7 +10,10 @@ const {
 } = require("../controllers/recepieControllers");
 
 router.route("/recepie/create").post(upload, createRecepie);
-router.route("/recepie/:_id").get(getRecepie).update(upload, updateRecepie);
+router
+  .route("/recepie/:_id")
+  .get(getRecepie)
+  .update(upload, updateValidator, updateRecepie);
 router.route("/recepies").get(getAllRecepies);
 
 module.exports = router;
