@@ -90,8 +90,6 @@ const updateRecepie = async (req, res) => {
     throw new BadRequest(`No recepie with an id of ${_id}`);
   }
 
-  
-
   //OK RESPONSE
   res.status(StatusCodes.OK).json({
     updatedRecepie: toUpdateRecepie,
