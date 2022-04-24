@@ -66,59 +66,31 @@ const createRecepie = async (req, res) => {
   });
 };
 
-// TODO : REFACTOR UPDATE CONTROLLER
-
 //UPDATE RECEPIE
 const updateRecepie = async (req, res) => {
   const { _id } = req.params;
   const { titulo, imagem, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
-  //FINDS THE DESIRED ELEMENT AND
-  const toUpdateRecepie = await recepies.findOne({
-    attributes: [
-      "id",
-      "titulo",
-      "descricao",
-      "tempo_preparo",
-      "rendimento",
-      "custo_medio",
-    ],
-    where: { id: _id },
-  });
-
-  /* SETTING UPDATED FIELD IF IT IS PROVIDED */
-
-  //SETTING PRIMARY KEY AS PUT CLEARS THE DATA
-  toUpdateRecepie.id = _id;
-
-  //CONDITIONS TO VERIFY THE PRESENCE OF REQUEST BODY TO EXECUTE THE UPDATE
-  if (titulo) {
-    toUpdateRecepie.titulo = titulo;
-  }
-  if (descricao) {
-    toUpdateRecepie.descricao = descricao;
-  }
-  if (tempo_preparo) {
-    toUpdateRecepie.tempo_preparo = tempo_preparo;
-  }
-  if (rendimento) {
-    toUpdateRecepie.rendimento = rendimento;
-  }
-  if (custo_medio) {
-    toUpdateRecepie.custo_medio = custo_medio;
-  }
-  if (req.files) {
-    toUpdateRecepie.imagem = req.files;
-  }
+  //FINDS THE DESIRED ELEMENT
+  const toUpdateRecepie = await recepies.update(
+    {
+      titulo,
+      descricao,
+      tempo_preparo,
+      imagem : req.files,
+      rendimento,
+      custo_medio,
+    },
+    {where: { id: _id }},
+  );
 
   //IF UPDATE FAILS FOR WHATEVER REASON
   if (!toUpdateRecepie) {
     throw new BadRequest(`No recepie with an id of ${_id}`);
   }
 
-  //SAVING UPDATED ELEMENT
-  toUpdateRecepie.save();
+  
 
   //OK RESPONSE
   res.status(StatusCodes.OK).json({
