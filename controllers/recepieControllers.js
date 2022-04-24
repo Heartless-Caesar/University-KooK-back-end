@@ -67,6 +67,8 @@ const createRecepie = async (req, res) => {
   });
 };
 
+// TODO : REFACTOR UPDATE CONTROLLER
+
 //UPDATE RECEPIE
 const updateRecepie = async (req, res) => {
   const { _id } = req.params;
