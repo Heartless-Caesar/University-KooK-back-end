@@ -2,7 +2,6 @@ const { NotFoundError } = require("../middleware/notFound");
 const { BadRequest } = require("../middleware/BadRequest");
 const { recepies, User } = require("../models/index");
 const { StatusCodes } = require("http-status-codes");
-const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 require("dotenv").config();
