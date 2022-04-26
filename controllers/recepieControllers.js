@@ -93,7 +93,9 @@ const updateRecepie = async (req, res) => {
 
   //IF UPDATE FAILS FOR WHATEVER REASON
   if (!toUpdateRecepie) {
-    throw new BadRequest(`No recepie with an id of ${_id}`);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: `No item with an ID of ${id}` });
   }
 
   //OK RESPONSE
@@ -115,7 +117,9 @@ const getRecepie = async (req, res) => {
 
   //ERROR HANDLER
   if (!recepie) {
-    throw new NotFoundError(`No recepie with id ${_id}`);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: `No recepie with id ${_id}` });
   }
 
   //TEST
@@ -154,7 +158,9 @@ const deleteRecepie = async (req, res) => {
 
   //IF A RECEPIE WITH THE PROVIDED ID DOES NOT EXIST
   if (!deletedItem) {
-    throw new BadRequest(`No item with an id of ${_id}`);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: `No item with an id of ${_id}` });
   }
 
   //OK RESPONSE
