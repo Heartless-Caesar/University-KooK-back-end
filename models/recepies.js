@@ -16,26 +16,44 @@ module.exports = (sequelize, DataTypes) => {
       titulo: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: "Titulo não pode ser nulo" },
+        },
       },
       descricao: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: "Descricao não pode ser nulo" },
+        },
       },
       imagem: {
         type: DataTypes.BLOB,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: "Imagem não pode ser nula" },
+        },
       },
       tempo_preparo: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: "Tempo_preparo não pode ser nulo" },
+        },
       },
       rendimento: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: "Rendimento não pode ser nulo" },
+        },
       },
       custo_medio: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notEmpty: { msg: "Custo_medio não pode ser nulo" },
+        },
       },
       fk_id_usuario: {
         type: DataTypes.STRING,
