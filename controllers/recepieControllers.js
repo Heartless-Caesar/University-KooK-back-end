@@ -59,6 +59,12 @@ const createRecepie = async (req, res) => {
     fk_id_usuario: currentUser.UUID,
   });
 
+  if (!newRecepie) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: "Please provide all the necessary elements" });
+  }
+
   //CORRECT RESPONSE
   res.status(StatusCodes.CREATED).json({
     addedRecepie: newRecepie,
@@ -78,11 +84,11 @@ const updateRecepie = async (req, res) => {
       titulo,
       descricao,
       tempo_preparo,
-      imagem : req.files,
+      imagem: req.files,
       rendimento,
       custo_medio,
     },
-    {where: { id: _id }},
+    { where: { id: _id } }
   );
 
   //IF UPDATE FAILS FOR WHATEVER REASON
@@ -128,7 +134,9 @@ const getAllRecepies = async (req, res) => {
 
   //IF DB IS EMPTY ERROR MESSAGE
   if (!allRecepies) {
-    throw new NotFoundError("There are no recepies currently");
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: "There are no recepies currently" });
   }
 
   //OK RESPONSE

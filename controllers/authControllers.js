@@ -2,6 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const { sequelize, User } = require("../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { BadRequest } = require("../middleware/BadRequest");
 require("dotenv").config();
 
 //REGISTRATION
@@ -10,6 +11,11 @@ const registerUser = async (req, res) => {
 
   const salt = await bcrypt.genSalt(10);
 
+  if (!nome || !senha || !email) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: "Please provide all credentials" });
+  }
   const newUser = await User.create({
     nome,
     senha: await bcrypt.hash(senha, salt),
