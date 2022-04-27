@@ -29,28 +29,25 @@ module.exports = (sequelize, DataTypes) => {
       },
       imagem: {
         type: DataTypes.BLOB,
-        allowNull: false,
-        validate: {
-          notEmpty: { msg: "Imagem não pode ser nula" },
-        },
+        allowNull: true,
       },
       tempo_preparo: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
           notEmpty: { msg: "Tempo_preparo não pode ser nulo" },
         },
       },
       rendimento: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
           notEmpty: { msg: "Rendimento não pode ser nulo" },
         },
       },
       custo_medio: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
           notEmpty: { msg: "Custo_medio não pode ser nulo" },
         },
