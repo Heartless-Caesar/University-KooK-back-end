@@ -137,7 +137,7 @@ const getAllRecepies = async (req, res) => {
   const allRecepies = await recepies.findAll({});
 
   //IF DB IS EMPTY ERROR MESSAGE
-  if (!allRecepies) {
+  if (!allRecepies || allRecepies.length == []) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ msg: "There are no recepies currently" });
