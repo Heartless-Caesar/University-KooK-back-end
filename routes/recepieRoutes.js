@@ -7,7 +7,7 @@ const {
   getAllRecepies,
   updateRecepie,
   deleteRecepie,
-} = require("../controllers/recepieControllers");
+} = require("../controllers/recepie_controllers");
 
 router.route("/recepie/create").post(upload, createRecepie);
 router.route("/recepie/:_id").put(upload, updateRecepie);

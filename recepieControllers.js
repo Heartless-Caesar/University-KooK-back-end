@@ -1,4 +1,4 @@
-const { recepies, User } = require("../models/index");
+const { recepies, User } = require("./models/index");
 const { StatusCodes } = require("http-status-codes");
 const multer = require("multer");
 const path = require("path");
