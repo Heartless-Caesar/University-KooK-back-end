@@ -1,13 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const {
+  getAllRecepies,
+} = require("../controllers/recepie_controllers/recepie_GET_ALL");
+
+const {
   createRecepie,
   upload,
+} = require("../controllers/recepie_controllers/recepie_POST");
+
+const {
   getRecepie,
-  getAllRecepies,
-  updateRecepie,
+} = require("../controllers/recepie_controllers/recepie_GET_SINGLE");
+
+const {
   deleteRecepie,
-} = require("../controllers/recepie_controllers");
+} = require("../controllers/recepie_controllers/recepie_DELETE");
+
+const {
+  updateRecepie,
+} = require("../controllers/recepie_controllers/recepie_PUT");
 
 router.route("/recepie/create").post(upload, createRecepie);
 router.route("/recepie/:_id").put(upload, updateRecepie);

@@ -1,12 +1,12 @@
+const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
-const Unauthorized = require("./Unauthorized");
 require("dotenv").config();
 
 const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    throw new Unauthorized("No auth header");
+    return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "No auth header" });
   }
 
   const token = authHeader.split(" ")[1];

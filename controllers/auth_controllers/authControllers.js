@@ -2,7 +2,6 @@ const { StatusCodes } = require("http-status-codes");
 const { sequelize, User } = require("../../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { BadRequest } = require("../middleware/BadRequest");
 require("dotenv").config();
 
 //REGISTRATION

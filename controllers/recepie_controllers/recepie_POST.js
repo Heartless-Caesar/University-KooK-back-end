@@ -67,4 +67,4 @@ const createRecepie = async (req, res) => {
   });
 };
 
-module.exports = { createRecepie };
+module.exports = { createRecepie, upload };
