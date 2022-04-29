@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
       imagem: {
         type: DataTypes.BLOB,
         allowNull: true,
+        belongsTo: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
       },
       tempo_preparo: {
         type: DataTypes.INTEGER,

@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { recepies } = require("../../models");
+const { recepies, User } = require("../../models");
 const path = require("path");
 const multer = require("multer");
 
@@ -44,12 +44,13 @@ const createRecepie = async (req, res) => {
   });
 
   //BODY INPUT
-  const newRecepie = await recepies.create({
+  let newRecepie = await recepies.create({
     titulo: titulo,
     imagem: req.files,
     descricao: descricao,
     tempo_preparo: tempo_preparo,
     rendimento: rendimento,
+    belongsTo: null,
     custo_medio: custo_medio,
     fk_id_usuario: currentUser.UUID,
   });
@@ -60,6 +61,10 @@ const createRecepie = async (req, res) => {
       .json({ msg: "Please provide all the necessary elements" });
   }
 
+  newRecepie = await recepies.update(
+    { belongsTo: newRecepie.id },
+    { where: { id: newRecepie.id } }
+  );
   //CORRECT RESPONSE
   res.status(StatusCodes.CREATED).json({
     addedRecepie: newRecepie,
