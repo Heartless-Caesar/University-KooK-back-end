@@ -65,6 +65,7 @@ const createRecepie = async (req, res) => {
     { belongsTo: newRecepie.id },
     { where: { id: newRecepie.id } }
   );
+  console.log(newRecepie);
   //CORRECT RESPONSE
   res.status(StatusCodes.CREATED).json({
     addedRecepie: newRecepie,
