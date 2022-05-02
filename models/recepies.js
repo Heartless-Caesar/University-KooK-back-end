@@ -42,6 +42,10 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "Tempo_preparo não pode ser nulo" },
         },
       },
+      categoria: {
+        type: DataTypes.ENUM("lanche", "almoco", "jantar", "cafe_da_manha"),
+        allowNull: false,
+      },
       rendimento: {
         type: DataTypes.INTEGER,
         allowNull: true,
