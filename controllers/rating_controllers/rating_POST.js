@@ -1,5 +1,5 @@
 const { avaliacoes, recepies } = require("../../models");
-const { StatusCodes, NOT_ACCEPTABLE } = require("http-status-codes");
+const { StatusCodes } = require("http-status-codes");
 
 const postRating = async (req, res) => {
   const { _id } = req.params;
@@ -22,3 +22,5 @@ const postRating = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ msg: "Rating posted", item: newRating });
 };
+
+module.exports = { postRating };
