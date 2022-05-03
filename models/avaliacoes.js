@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   avaliacoes.init(
     {
       nota: DataTypes.NUMBER,
+      descricao: DataTypes.STRING,
       fk_usuario_id: DataTypes.NUMBER,
+      fk_recepie_id: DataTypes.NUMBER,
     },
     {
       sequelize,
