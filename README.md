@@ -9,7 +9,7 @@ Este é o back end do projeto Kook.
 1. Utilização de tokens para realizar a verificação
    de usuários.
 
-## Dependências utilizadas utilizadas
+## Dependências utilizadas
 
 1. bcrypt,
 1. cors,
