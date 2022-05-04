@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   avaliacoes.init(
     {
-      nota: DataTypes.NUMBER,
+      nota: DataTypes.DECIMAL,
       descricao: DataTypes.STRING,
-      fk_usuario_id: DataTypes.NUMBER,
-      fk_recepie_id: DataTypes.NUMBER,
+      fk_usuario_id: DataTypes.DECIMAL,
+      fk_recepie_id: DataTypes.DECIMAL,
     },
     {
       sequelize,
