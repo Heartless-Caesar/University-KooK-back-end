@@ -32,8 +32,14 @@ const upload = multer({
 //CREATE NEW RECEPIE
 const createRecepie = async (req, res) => {
   //INPUT "FORM" DATA
-  const { titulo, descricao, tempo_preparo, rendimento, custo_medio } =
-    req.body;
+  const {
+    titulo,
+    descricao,
+    tempo_preparo,
+    rendimento,
+    custo_medio,
+    categoria,
+  } = req.body;
 
   //TESTING PURPOSES
   console.log(req.user);
@@ -52,6 +58,7 @@ const createRecepie = async (req, res) => {
     rendimento: rendimento,
     belongsTo: null,
     custo_medio: custo_medio,
+    categoria: categoria,
     fk_id_usuario: currentUser.UUID,
   });
 
