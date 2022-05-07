@@ -5,6 +5,7 @@ const postRating = async (req, res) => {
   const { _id } = req.params;
   const { nota, descricao } = req.body;
 
+  //Verify if recepie exists so comment can be posted
   const recepieCheck = await recepies.findOne({ where: { id: _id } });
 
   if (!recepieCheck) {
