@@ -20,10 +20,15 @@ const deleteRecepie = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: `No item with an id of ${_id}` });
     }
+    //OK RESPONSE
+    return res
+      .status(StatusCodes.OK)
+      .json({ resp: "Deleted", deleted: deletedItem });
   }
 
-  //OK RESPONSE
-  res.status(StatusCodes.OK).json({ resp: "Deleted", deleted: deletedItem });
+  res
+    .status(StatusCodes.INTERNAL_SERVER_ERROR)
+    .json({ msg: "Something went wrong" });
 };
 
 module.exports = { deleteRecepie };
