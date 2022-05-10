@@ -27,7 +27,7 @@ const deleteRecepie = async (req, res) => {
   } else {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       msg: "Something went wrong when trying to delete the recepie",
-      UUID: `Current user UUID ${req.user.UUID} is not the UUID for the current recepie ${checkCreatedBy.belongsTo}`,
+      UUID: `Current user UUID ${req.user.id} is not the UUID for the current recepie ${checkCreatedBy.fk_id_usuario}`,
     });
   }
 };
