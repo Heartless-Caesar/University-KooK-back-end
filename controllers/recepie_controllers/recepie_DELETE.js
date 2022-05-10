@@ -1,19 +1,25 @@
 const { StatusCodes } = require("http-status-codes");
-const { recepies } = require("../../models");
+const { recepies, User } = require("../../models");
 
 //DELETE CONTROLLER
 const deleteRecepie = async (req, res) => {
   //ID OF THE ITEM TO BE DELETED
   const { _id } = req.params;
 
-  //THE DELETION ITSELF
-  const deletedItem = await recepies.destroy({ where: { id: _id } });
+  const checkCreatedBy = await recepies.findOne({
+    where: { belongsTo: req.user.UUID },
+  });
 
-  //IF A RECEPIE WITH THE PROVIDED ID DOES NOT EXIST
-  if (!deletedItem) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ msg: `No item with an id of ${_id}` });
+  if (checkCreatedBy.belongsTo == req.user.UUID) {
+    //THE DELETION ITSELF
+    const deletedItem = await recepies.destroy({ where: { id: _id } });
+
+    //IF A RECEPIE WITH THE PROVIDED ID DOES NOT EXIST
+    if (!deletedItem) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: `No item with an id of ${_id}` });
+    }
   }
 
   //OK RESPONSE
