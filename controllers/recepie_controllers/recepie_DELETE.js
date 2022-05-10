@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { recepies, User } = require("../../models");
+const { recepies } = require("../../models");
 
 //DELETE CONTROLLER
 const deleteRecepie = async (req, res) => {
