@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       belongsTo: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       tempo_preparo: {
         type: DataTypes.INTEGER,
