@@ -69,7 +69,7 @@ const createRecepie = async (req, res) => {
   }
 
   newRecepie = await recepies.update(
-    { belongsTo: newRecepie.id },
+    { belongsTo: currentUser.UUID },
     { where: { id: newRecepie.id } }
   );
   console.log(newRecepie);

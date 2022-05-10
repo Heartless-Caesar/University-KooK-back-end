@@ -21,10 +21,16 @@ const {
   updateRecepie,
 } = require("../controllers/recepie_controllers/recepie_PUT");
 
+const {
+  postComment,
+} = require("../controllers/rating_controllers/comment_POST");
+
+const { postRating } = require("../controllers/rating_controllers/rating_POST");
+
 router.route("/recepie/create").post(upload, createRecepie);
 router.route("/recepie/:_id").put(upload, updateRecepie);
 router.route("/recepie/:_id").delete(deleteRecepie);
-router.route("/recepie/:_id").get(getRecepie);
+router.route("/recepie/:_id").get(getRecepie).post(postComment, postRating);
 router.route("/recepies").get(getAllRecepies);
 
 module.exports = router;

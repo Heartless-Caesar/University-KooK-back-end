@@ -20,4 +20,4 @@ const postComment = async (req, res) => {
     .json({ msg: `Comment created`, comment: newComment });
 };
 
-module.exports = postComment;
+module.exports = { postComment };
