@@ -56,7 +56,7 @@ const createRecepie = async (req, res) => {
     descricao: descricao,
     tempo_preparo: tempo_preparo,
     rendimento: rendimento,
-    belongsTo: null,
+    belongsTo: " ",
     custo_medio: custo_medio,
     categoria: categoria,
     fk_id_usuario: currentUser.UUID,

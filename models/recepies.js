@@ -32,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       belongsTo: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       tempo_preparo: {
         type: DataTypes.INTEGER,

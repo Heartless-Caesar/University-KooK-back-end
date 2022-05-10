@@ -6,8 +6,9 @@ const deleteRecepie = async (req, res) => {
   //ID OF THE ITEM TO BE DELETED
   const { _id } = req.params;
 
+  const currentUser = await User.findOne({ where: { UUID: req.user.UUID } });
   const checkCreatedBy = await recepies.findOne({
-    where: { id: _id, belongsTo: req.user.UUID },
+    where: { id: _id, belongsTo: currentUser.UUID },
   });
 
   if (checkCreatedBy.belongsTo == req.user.UUID) {
