@@ -10,7 +10,7 @@ const deleteRecepie = async (req, res) => {
     where: { id: _id },
   });
   console.log(checkCreatedBy);
-  if (checkCreatedBy.belongsTo == req.user.UUID) {
+  if (checkCreatedBy.fk_id_usuario == req.user.id) {
     //THE DELETION ITSELF
     const deletedItem = await recepies.destroy({ where: { id: _id } });
 

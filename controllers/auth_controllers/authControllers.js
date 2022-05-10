@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
   });
 
   const signToken = jwt.sign(
-    { UUID: newUser.UUID, email: newUser.email },
+    { id: newUser.id, email: newUser.email },
     process.env.JWT_SECRET,
     {
       expiresIn: process.env.EXPIRES_IN,
@@ -65,7 +65,7 @@ const login = async (req, res) => {
       .json({ msg: "Passwords don't match" });
   }
   const loginToken = jwt.sign(
-    { email: dbUser.email, UUID: dbUser.UUID },
+    { email: dbUser.email, id: dbUser.id },
     process.env.JWT_SECRET,
     {
       expiresIn: process.env.EXPIRES_IN,

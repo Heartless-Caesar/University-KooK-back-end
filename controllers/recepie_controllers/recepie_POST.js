@@ -44,9 +44,9 @@ const createRecepie = async (req, res) => {
   //TESTING PURPOSES
   console.log(req.user);
 
-  //USER UUID SERVING AS FOREIGN KEY
+  //USER ID SERVING AS FOREIGN KEY
   const currentUser = await User.findOne({
-    where: { UUID: req.user.UUID },
+    where: { id: req.user.id },
   });
 
   //BODY INPUT
@@ -56,10 +56,9 @@ const createRecepie = async (req, res) => {
     descricao: descricao,
     tempo_preparo: tempo_preparo,
     rendimento: rendimento,
-    belongsTo: null,
     custo_medio: custo_medio,
     categoria: categoria,
-    fk_id_usuario: currentUser.UUID,
+    fk_id_usuario: currentUser.id,
   });
 
   if (!newRecepie) {
@@ -68,10 +67,6 @@ const createRecepie = async (req, res) => {
       .json({ msg: "Please provide all the necessary elements" });
   }
 
-  newRecepie = await recepies.update(
-    { belongsTo: currentUser.UUID },
-    { where: { id: newRecepie.id } }
-  );
   console.log(newRecepie);
   //CORRECT RESPONSE
   res.status(StatusCodes.CREATED).json({

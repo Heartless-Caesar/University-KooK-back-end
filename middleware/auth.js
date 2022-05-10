@@ -14,7 +14,7 @@ const authMiddleware = async (req, res, next) => {
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
     console.log(user);
-    req.user = { UUID: user.UUID, email: user.email };
+    req.user = { UUID: user.id, email: user.email };
 
     next();
   } catch (error) {
