@@ -7,7 +7,7 @@ const deleteRecepie = async (req, res) => {
   const { _id } = req.params;
 
   const checkCreatedBy = await recepies.findOne({
-    where: { belongsTo: req.user.UUID },
+    where: { id: _id, belongsTo: req.user.UUID },
   });
 
   if (checkCreatedBy.belongsTo == req.user.UUID) {
@@ -28,7 +28,7 @@ const deleteRecepie = async (req, res) => {
 
   res
     .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .json({ msg: "Something went wrong" });
+    .json({ msg: "Something went wrong when trying to delete the recepie" });
 };
 
 module.exports = { deleteRecepie };
