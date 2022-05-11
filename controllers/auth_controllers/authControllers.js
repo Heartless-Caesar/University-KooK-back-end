@@ -72,9 +72,6 @@ const login = async (req, res) => {
     }
   );
 
-  //TEST LOG
-  console.log(dbUser);
-
   res.status(StatusCodes.OK).json({ user: dbUser, token: loginToken });
 };
 

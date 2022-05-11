@@ -67,7 +67,6 @@ const createRecepie = async (req, res) => {
       .json({ msg: "Please provide all the necessary elements" });
   }
 
-  console.log(newRecepie);
   //CORRECT RESPONSE
   res.status(StatusCodes.CREATED).json({
     addedRecepie: newRecepie,
