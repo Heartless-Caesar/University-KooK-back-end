@@ -4,33 +4,33 @@ const { recepies } = require("../../models");
 //UPDATE RECEPIE
 const updateRecepie = async (req, res) => {
   const { _id } = req.params;
-  const { titulo, imagem, descricao, tempo_preparo, rendimento, custo_medio } =
+  const { titulo, descricao, tempo_preparo, rendimento, custo_medio } =
     req.body;
 
-  //FINDS THE DESIRED ELEMENT
-  const toUpdateRecepie = await recepies.update(
-    {
-      titulo,
-      descricao,
-      tempo_preparo,
-      imagem: req.files,
-      rendimento,
-      custo_medio,
-    },
-    { where: { id: _id } }
-  );
+  let toUpdateRecepie = await recepies.findOne({ where: { id: _id } });
 
-  //IF UPDATE FAILS FOR WHATEVER REASON
-  if (!toUpdateRecepie) {
+  if (toUpdateRecepie.fk_id_usuario == req.user.id) {
+    //UPDATES THE DESIRED ELEMENT
+    toUpdateRecepie = await recepies.update(
+      {
+        titulo,
+        descricao,
+        tempo_preparo,
+        imagem: req.files,
+        rendimento,
+        custo_medio,
+      },
+      { where: { id: _id } }
+    );
+
     return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ msg: `No item with an ID of ${id}` });
+      .status(StatusCodes.OK)
+      .json({ msg: "Updated element", updatedItem: toUpdateRecepie });
   }
 
   //OK RESPONSE
-  res.status(StatusCodes.OK).json({
-    updatedRecepie: toUpdateRecepie,
-    token: req.headers.authorization,
+  res.status(StatusCodes.NOT_MODIFIED).json({
+    msg: "Recepie not updated",
   });
 };
 
