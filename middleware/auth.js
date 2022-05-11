@@ -19,7 +19,7 @@ const authMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(req.headers.authorization);
-    throw new Unauthorized("Auth invalid");
+    return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "No auth header" });
   }
 };
 
