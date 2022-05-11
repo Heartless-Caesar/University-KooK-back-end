@@ -29,7 +29,7 @@ const updateRecepie = async (req, res) => {
   }
 
   //OK RESPONSE
-  res.status(StatusCodes.NOT_MODIFIED).json({
+  res.status(StatusCodes.UNAUTHORIZED).json({
     msg: "Recepie not updated",
   });
 };
