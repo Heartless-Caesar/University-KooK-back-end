@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+
+/* ------------------------------- IMPORTS ----------------------------------- */
 const {
   getAllRecepies,
 } = require("../controllers/recepie_controllers/recepie_GET_ALL");
@@ -27,10 +29,18 @@ const {
 
 const { postRating } = require("../controllers/rating_controllers/rating_POST");
 
+/* --------------------------------------------------------------------------- */
+
+/* ----------------------------- ROUTES -------------------------------------- */
 router.route("/recepie/create").post(upload, createRecepie);
+
 router.route("/recepie/:_id").put(upload, updateRecepie);
+
 router.route("/recepie/:_id").delete(deleteRecepie);
+
 router.route("/recepie/:_id").get(getRecepie).post(postComment, postRating);
+
 router.route("/recepies").get(getAllRecepies);
+/* --------------------------------------------------------------------------- */
 
 module.exports = router;
