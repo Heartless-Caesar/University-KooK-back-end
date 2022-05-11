@@ -9,9 +9,15 @@ const deleteRecepie = async (req, res) => {
   const checkCreatedBy = await recepies.findOne({
     where: { id: _id },
   });
+
   console.log("Testing");
+
   console.log(checkCreatedBy);
+
   console.log(req.user.id);
+
+  console.log("End testing");
+
   if (checkCreatedBy.fk_id_usuario == req.user.id) {
     //THE DELETION ITSELF
     const deletedItem = await recepies.destroy({ where: { id: _id } });
@@ -29,7 +35,7 @@ const deleteRecepie = async (req, res) => {
   } else {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       msg: "Something went wrong when trying to delete the recepie",
-      UUID: `Current user UUID ${req.user.id} is not the UUID for the current recepie ${checkCreatedBy.fk_id_usuario}`,
+      UUID: `Current user id ${req.user.id} is not the id for the current recepie ${checkCreatedBy.fk_id_usuario}`,
     });
   }
 };
