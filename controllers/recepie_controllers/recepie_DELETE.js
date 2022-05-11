@@ -14,7 +14,7 @@ const deleteRecepie = async (req, res) => {
 
   console.log(checkCreatedBy);
 
-  console.log(req.user.id);
+  console.log(req.user.email);
 
   console.log("End testing");
 
@@ -32,12 +32,11 @@ const deleteRecepie = async (req, res) => {
     return res
       .status(StatusCodes.OK)
       .json({ resp: "Deleted", deleted: deletedItem });
-  } else {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      msg: "Something went wrong when trying to delete the recepie",
-      UUID: `Current user id ${req.user.id} is not the id for the current recepie ${checkCreatedBy.fk_id_usuario}`,
-    });
   }
+  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    msg: "Something went wrong when trying to delete the recepie",
+    UUID: `Current user id ${req.user.id} is not the id for the current recepie ${checkCreatedBy.fk_id_usuario}`,
+  });
 };
 
 module.exports = { deleteRecepie };
