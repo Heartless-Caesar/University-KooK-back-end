@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { recepies, User } = require("../../models");
+const { recepies, User, ingredientes } = require("../../models");
 const path = require("path");
 const multer = require("multer");
 
@@ -39,6 +39,9 @@ const createRecepie = async (req, res) => {
     rendimento,
     custo_medio,
     categoria,
+    nome,
+    quantidade,
+    unidade_medida,
   } = req.body;
 
   //TESTING PURPOSES
