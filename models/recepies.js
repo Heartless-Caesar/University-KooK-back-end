@@ -49,8 +49,9 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "Rendimento não pode ser nulo" },
         },
       },
-      ingredientes: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+      fk_id_ingredientes: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
       custo_medio: {
         type: DataTypes.INTEGER,
