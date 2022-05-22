@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ingredientes extends Model {
     /**
@@ -11,19 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  ingredientes.init(
-    {
-      nome: DataTypes.STRING,
-      quantidade: DataTypes.INTEGER,
-      unidade_medida: DataTypes.STRING,
-      fk_receita_id: DataTypes.INTEGER,
-      fk_usuario_id: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: "ingredientes",
-      tableName: "ingredientes",
-    }
-  );
+  ingredientes.init({
+    nome: DataTypes.STRING,
+    quantidade: DataTypes.INTEGER,
+    unidade_medida: DataTypes.STRING,
+    fk_id_usuario: DataTypes.INTEGER,
+    fk_id_receita: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'ingredientes',
+  });
   return ingredientes;
 };
