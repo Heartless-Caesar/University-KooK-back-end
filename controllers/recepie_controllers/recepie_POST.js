@@ -70,6 +70,7 @@ const createRecepie = async (req, res) => {
       .json({ msg: "Please provide all the necessary elements" });
   }
   
+  //POST for ingredients, make a post request for each of the objects in an array
   let newIngredient = await ingredientes.create({
     nome : nome,
     quantidade : quantidade,
@@ -77,8 +78,9 @@ const createRecepie = async (req, res) => {
     fk_id_usuario : req.user.id,
     fk_id_receita : newRecepie.id
   })
-
-  //CORRECT RESPONSE
+ /*----------------------------------------------------------------------------*/
+  
+ //CORRECT RESPONSE
   res.status(StatusCodes.CREATED).json({
     addedRecepie: newRecepie,
     ingredients : newIngredient
