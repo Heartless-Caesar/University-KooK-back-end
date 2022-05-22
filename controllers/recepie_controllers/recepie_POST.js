@@ -63,17 +63,25 @@ const createRecepie = async (req, res) => {
     categoria: categoria,
     fk_id_usuario: currentUser.id,
   });
-
+  
   if (!newRecepie) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ msg: "Please provide all the necessary elements" });
   }
+  
+  let newIngredient = await ingredientes.create({
+    nome : nome,
+    quantidade : quantidade,
+    unidade_medida : unidade_medida,
+    fk_id_usuario : req.user.id,
+    fk_id_receita : newRecepie.id
+  })
 
   //CORRECT RESPONSE
   res.status(StatusCodes.CREATED).json({
     addedRecepie: newRecepie,
-    token: req.headers.authorization,
+    ingredients : newIngredient
   });
 };
 
